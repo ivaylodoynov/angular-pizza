@@ -12,6 +12,11 @@ import { PreloaderComponent } from './preloader/preloader.component';
     HeaderComponent,
     PreloaderComponent
   ],
+  exports: [
+    FooterComponent,
+    HeaderComponent,
+    PreloaderComponent
+  ],
   imports: [
     CommonModule
   ]
