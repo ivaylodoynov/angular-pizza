@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PreloaderComponent } from './preloader.component';
+import { SubheaderComponent } from './subheader.component';
 
-describe('PreloaderComponent', () => {
-  let component: PreloaderComponent;
-  let fixture: ComponentFixture<PreloaderComponent>;
+describe('SubheaderComponent', () => {
+  let component: SubheaderComponent;
+  let fixture: ComponentFixture<SubheaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PreloaderComponent ]
+      declarations: [ SubheaderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PreloaderComponent);
+    fixture = TestBed.createComponent(SubheaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

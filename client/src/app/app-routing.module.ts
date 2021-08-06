@@ -1,13 +1,18 @@
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './authentication/login/login.component';
-import { RegisterComponent } from './authentication/register/register.component';
+import { AuthGuardService } from './core/services/auth-guard.service';
+
+import { HomeComponent } from './home/home.component';
+import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'pizzas', loadChildren: './pizzas/pizzas.module#PizzasModule' },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuardService] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
