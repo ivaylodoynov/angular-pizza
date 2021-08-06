@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ApiService } from './api.service';
-import { ICartProduct } from '../interfaces/ICartProduct';
+import { ICartPizza } from '../models/cartPizza.model';
+import { Size } from '../common/size.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -13,23 +14,30 @@ export class CartsService {
 
     constructor(private api: ApiService) { }
 
-    mine(): Observable<Array<ICartProduct>> {
+    mine(): Observable<Array<ICartPizza>> {
         return this.api.get(this.cartsPath);
     }
 
-    totalProducts(): Observable<number> {
-        return this.api.get(this.cartsPath + 'totalproducts');
+    total(): Observable<number> {
+        return this.api.get(this.cartsPath + 'total');
     }
 
-    addProduct(id, quantity) {
-        return this.api.post(this.cartsPath, { productId: id, quantity: quantity });
+    addPizza(id: number, quantity: number = 1, size: Size = Size.Small) {
+        return this.api.post(this.cartsPath, {
+            pizzaId: id,
+            quantity: quantity,
+            size: size
+        });
     }
 
-    updateProduct(id, quantity) {
-        return this.api.put(this.cartsPath, { productId: id, quantity: quantity });
+    updatePizza(id: number, quantity: number) {
+        return this.api.put(this.cartsPath, {
+            pizzaId: id,
+            quantity: quantity
+        });
     }
 
-    removeProduct(id) {
+    removePizza(id: number) {
         return this.api.delete(this.cartsPath + id);
     }
 }
