@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <form class="atc-form" method="post">
+                    <div class="atc-form">
                         <div class="form-group">
                             <label>Quantity</label>
                             <div class="qty">
@@ -60,7 +60,15 @@
                         <button type="submit" name="button" class="btn-custom secondary" (click)="addToCart()">
                             Order <i class="fas fa-shopping-cart"></i>
                         </button>
-                    </form>
+                        <a *ngIf="isAdministrator()" routerLink="/pizza/{{pizza?.id}}/edit" type="submit" name="button"
+                            class="btn-custom secondary">
+                            Edit <i class="fas fa-edit"></i>
+                        </a>
+                        <a *ngIf="isAdministrator()" (click)="deleteProduct()" type="submit" name="button"
+                            class="btn-custom close-danger">
+                            Delete <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
