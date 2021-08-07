@@ -16,8 +16,8 @@ export class MenuComponent implements OnInit {
 
   query: string;
   page: number = 1;
-  totalPages: number;
-  pizzas: Array<IPizza>;
+  totalPages: number =0;
+  pizzas: Array<IPizza> =[];
   errors: IErrors = { errors: {} };
 
   constructor(

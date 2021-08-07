@@ -3,13 +3,9 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "client": {
+    "Slices": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -17,69 +13,95 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/client",
+            "outputPath": "dist/Slices",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "aot": true,
             "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "leaflet/"
+              },
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
+              "src/assets/css/plugins/bootstrap.min.css",
+              "src/assets/css/plugins/animate.min.css",
+              "src/assets/css/plugins/magnific-popup.css",
+              "src/assets/css/plugins/slick.css",
+              "src/assets/css/plugins/slick-theme.css",
+              "src/assets/fonts/flaticon/flaticon.css",
+              "src/assets/fonts/font-awesome/css/all.min.css",
+              "node_modules/leaflet/dist/leaflet.css",
+              "src/assets/css/style.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/plugins/jquery-3.4.1.min.js",
+              "src/assets/js/plugins/popper.min.js",
+              "src/assets/js/plugins/waypoint.js",
+              "src/assets/js/plugins/bootstrap.min.js",
+              "src/assets/js/plugins/jquery.magnific-popup.min.js",
+              "src/assets/js/plugins/jquery.slimScroll.min.js",
+              "src/assets/js/plugins/imagesloaded.min.js",
+              "src/assets/js/plugins/jquery.steps.min.js",
+              "src/assets/js/plugins/jquery.countdown.min.js",
+              "src/assets/js/plugins/isotope.pkgd.min.js",
+              "src/assets/js/plugins/slick.min.js",
+              "src/assets/js/main.js",
+              "node_modules/leaflet/dist/leaflet.js",
+              "src/assets/js/map.js"
+            ]
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
-          },
-          "defaultConfiguration": "production"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "Slices:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "client:build:production"
-            },
-            "development": {
-              "browserTarget": "client:build:development"
+              "browserTarget": "Slices:build:production"
             }
-          },
-          "defaultConfiguration": "development"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "client:build"
+            "browserTarget": "Slices:build"
           }
         },
         "test": {
@@ -98,9 +120,37 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "Slices:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "Slices:serve:production"
+            }
+          }
         }
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "Slices",
+  "cli": {
+    "analytics": "2b9cb7e8-c096-421e-92f9-932a5e0f61cd"
+  }
 }
