@@ -4,14 +4,15 @@ services:
 
     data:
         container_name: sqlserver
-        image: mcr.microsoft.com/mssql/server:2019-latest
+        image: mcr.microsoft.com/azure-sql-edge:latest
         ports: 
             - "1433:1433"
         environment:
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=yourStrongPassword12!@
+            - MSSQL_SA_PASSWORD=yourStrongPassword12!@
         volumes: 
-            - sqldata:/var/opt/mssql 
+            - events_mssql:/var/opt/mssql
+            - ./setup.sql:/usr/config/setup.sql
         networks: 
             - pizza-network
 
@@ -49,4 +50,4 @@ networks:
     pizza-network:
 
 volumes:
-    sqldata:
+    events_mssql:
