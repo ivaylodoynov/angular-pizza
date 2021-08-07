@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit {
   orderSize: Size = Size.Small;
   pizza: IPizza;
   errors: IErrors = { errors: {} };
+  breadcrumbs: string[];
 
   constructor(
     private router: Router,
@@ -35,6 +36,7 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.pizzasService.details(this.id).subscribe(pizza => {
       this.pizza = pizza;
+      this.breadcrumbs = ['Home', 'Menu', this.pizza.name]
     });
   }
 
